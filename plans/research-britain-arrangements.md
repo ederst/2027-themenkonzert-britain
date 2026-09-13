@@ -238,10 +238,10 @@ Status: Complete
 
 ## Deployment Plan (static site)
 - LIVE: https://ederst.github.io/2027-themenkonzert-britain/ (GitHub Pages, public repo `ederst/2027-themenkonzert-britain`, source = `docs/` on `main`)
-- Deliverable: `docs/index.html` (single file, self-contained, German, clickable links, embedded filter).
+- Deliverable: `docs/index.html` (landing) + `docs/arrangements.html` (199 rows) + `docs/guests.html` (12 rows). Each self-contained, German, clickable links, embedded filter; landing links the two section pages.
 - Data CSV (`britain-arrangements.csv`) stays at repo root, canonical; site is generated from it + `guest-acts.csv`.
 - Regenerate + publish anytime:
-  1. `mise run make-site` → rewrites `docs/index.html`
-  2. `git add docs/index.html britain-arrangements.csv guest-acts.csv && git commit -m "data: update site"`
+  1. `mise run make-site` → rewrites `docs/index.html` + `docs/arrangements.html` + `docs/guests.html`
+  2. `git add docs/ britain-arrangements.csv guest-acts.csv && git commit -m "data: update site"`
   3. `git push` → Pages auto-rebuilds
 - Verify after push: `curl -sI https://ederst.github.io/2027-themenkonzert-britain/` → 200
