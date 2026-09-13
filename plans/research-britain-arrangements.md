@@ -237,6 +237,11 @@ Status: Complete
 - Generator reruns deterministically; row counts in HTML match CSV row counts; site opens via `file://` and any static host / GitHub Pages with no build step, no runtime deps.
 
 ## Deployment Plan (static site)
-- Deliverable: `britain-concert-site.html` (single file, self-contained, German, clickable links, embedded filter) at repo root.
-- Host options: (1) open locally via `file://` for our orchestral colleagues; (2) push to GitHub Pages as `docs/britain-concert-site.html` if we want a public URL; (3) any static hosting (ublock-safe, no network needed).
-- Regenerate anytime: `mise run make-site` (or `uv run --no-project --script plans/make_site.py`).
+- LIVE: https://ederst.github.io/2027-themenkonzert-britain/ (GitHub Pages, public repo `ederst/2027-themenkonzert-britain`, source = `docs/` on `main`)
+- Deliverable: `docs/index.html` (single file, self-contained, German, clickable links, embedded filter).
+- Data CSV (`britain-arrangements.csv`) stays at repo root, canonical; site is generated from it + `guest-acts.csv`.
+- Regenerate + publish anytime:
+  1. `mise run make-site` → rewrites `docs/index.html`
+  2. `git add docs/index.html britain-arrangements.csv guest-acts.csv && git commit -m "data: update site"`
+  3. `git push` → Pages auto-rebuilds
+- Verify after push: `curl -sI https://ederst.github.io/2027-themenkonzert-britain/` → 200

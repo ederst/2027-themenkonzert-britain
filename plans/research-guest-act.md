@@ -109,5 +109,7 @@ _(write when phase completes)_
 Done: `guest-acts.csv` 12 acts, 16 cols spec header, PASS on `check_guest_csv.py` (uniform cols, ≥1 contact each, no dupes). Site embeds guest section (12 rows). Types: cover bands + Beatles tributes + pipe/brass acts covered (Styria-first ranking).
 Known limits: Type-G (pipe/traditional) thinner in Styria. Neighbors (SI/HU) fill gap; link HEAD-check deferred (needs `--links` + network).
 
+Site LIVE: https://ederst.github.io/2027-themenkonzert-britain/ (guest acts section = 12 rows, published 2026-09-13).
+
 ## Deployment Plan
 _(write when all phases complete: deliverable is `guest-acts.csv` in repo root + `plans/check_guest_csv.py`; booking happens outside this repo, CSV is the handoff artifact)_
