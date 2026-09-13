@@ -79,6 +79,7 @@ nav.cards a{{display:block;padding:1.3rem 1.5rem;border:1px solid var(--line);bo
 nav.cards a:hover{{border-color:var(--acc)}}
 nav.cards b{{display:block;font-size:1.1rem;color:var(--acc)}}
 nav.cards span{{display:block;color:var(--mut);font-size:.85rem;margin-top:.15rem}}
+p.home{{margin:0 0 .5rem;font-size:.85rem}}
 footer{{padding:1.5rem 1.25rem 2.5rem;text-align:center;color:var(--mut);font-size:.8rem}}
 .badge{{display:inline-block;padding:.05rem .45rem;border-radius:999px;background:var(--soft);font-size:.72rem;color:var(--mut)}}
 </style>
@@ -108,7 +109,8 @@ def page(sid, title):
     has_arr = "Arrangement Title" in header
     sel_arr = '<select id="a1"><option value="">Arrangement: alle</option><option>gefunden</option><option>offen</option></select>' if has_arr else ""
     tools = f'<div class="tools"><input type="search" id="q" placeholder="Suchen…" autocomplete="off">{sel_genre}{sel_diff}{sel_arr}</div>'
-    body = f'''{tools}
+    body = f'''<p class="home"><a href="index.html">← Übersicht</a></p>
+{tools}
 <section id="{sid}">
 <h2>{sec_title} <span class="count" id="cnt"></span></h2>
 <div class="wrap"><table>
