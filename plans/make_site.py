@@ -165,7 +165,7 @@ def landing():
         f'<a href="{sid}.html"><b>{SECTIONS[sid][0].split(" (")[0]}</b><span>{len(SECTIONS[sid][1])} Einträge · <span class="badge">{sid}</span></span><span>Alle Einträge durchsuchen, filtern, Links anklicken.</span></a>'
         for sid in ("arrangements", "guests")
     )
-    body = f'<nav class="cards">{cards}</nav><p>Diese Liste wird aus den <code>.csv</code>-Daten erzeugt. Stand siehe Fußzeile.</p>'
+    body = f'<nav class="cards">{cards}</nav><p>Stand der Auswahl siehe Fußzeile.</p>'
     return HEAD.format(title="Großbritannien Themenkonzert 2027, Auswahl-Hilfe") + "<main>" + body + FOOTER.format(a=len(t_rows), g=len(g_rows)) + "</main></body></html>"
 
 
