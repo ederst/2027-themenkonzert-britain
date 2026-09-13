@@ -85,12 +85,12 @@ footer{{padding:1.5rem 1.25rem 2.5rem;text-align:center;color:var(--mut);font-si
 </head>
 <body>
 <header>
-<h1>Großbritannien wichtig · Themenkonzert 2027</h1>
-<p>Was wir spielen können: Arrangements &amp; Gastakte für unsere Blasmusik. Gefiltert, sortierbar, alle Links anklickbar.</p>
+<h1>Themenkonzert 2027 - Großbritannien</h1>
+<p>Was wir spielen können: Arrangements &amp; Gastakte.</p>
 </header>
 """
 
-FOOTER = "<footer>Stand der Recherche · Großbritannien-Themenkonzert 2027 · {a} Arrangements, {g} Gastakte. Datenquelle: <code>.csv</code> (eine Wahrheit), diese Seiten werden daraus erzeugt.</footer>"
+FOOTER = "<footer>Stand der Recherche · Großbritannien-Themenkonzert 2027 · {a} Arrangements, {g} Gastakte.</footer>"
 
 
 def page(sid, title):
