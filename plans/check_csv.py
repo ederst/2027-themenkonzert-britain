@@ -67,6 +67,21 @@ def main():
             fail += 1
     if not any(b in "".join(r[0] for r in rows) for b in NON_BRITISH):
         print("[pass] British-only scan: no wall-list artists present")
+    # 4) difficulty: numeric 1-5 with .5 steps, or empty only on no-arrangement rows
+    diff_re = re.compile(r"^[1-5](\.5)?$")
+    for i, r in enumerate(rows, 2):
+        d = r[5].strip()
+        if d and not diff_re.match(d):
+            print(f"[fail] row {i}: difficulty {d!r} not numeric 1-5 (.5 steps)")
+            fail += 1
+        if not d and r[3] not in ("", "-"):
+            print(f"[fail] row {i}: arrangement exists but difficulty empty")
+            fail += 1
+        if d and r[3] in ("", "-"):
+            print(f"[fail] row {i}: difficulty without arrangement")
+            fail += 1
+    if not fail:
+        print("[pass] difficulty format: numeric 1-5 (.5 steps), empty = no arrangement")
     # 4) link health (optional: pass --links; network may be blocked in sandbox)
     if not do_links:
         print("[skip] link health check (pass --links to enable; network-optional by design)")

@@ -130,7 +130,8 @@ function filter(){{
     }}
     if(diff){{
       const dj=COLS.indexOf('Difficulty'); if(dj<0) return;
-      if(!(r[dj]||'').toLowerCase().includes(diff.toLowerCase())) return;
+      const v=parseFloat(r[dj]);
+      if(!(diff==='Leicht' ? v>0 && v<=2 : diff==='Mittel' ? v>=2.5 && v<=3.5 : v>=4)) return;
     }}
     shown++;
     h+='<tr>'+r.map(c=>c?(c.startsWith('https://')||c.startsWith('http://'))?'<td><a href="'+c+'" target="_blank" rel="noopener">'+c+'</a></td>':'<td>'+c+'</td>':'<td class="empty">–</td>').join('')+'</tr>';
