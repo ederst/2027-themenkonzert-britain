@@ -2,4 +2,4 @@
 uv = "0.12.13"
 
 [tasks]
-make-site = { description = "Build britain-concert-site.html (static, German UI, self-contained) from britain-arrangements.csv + guest-acts.csv", run = "uv run --no-project -- plans/make_site.py" }
+make-site = { description = "Build docs/index.html (static, German UI, self-contained) from britain-arrangements.csv + guest-acts.csv", run = "uv run --no-project -- plans/make_site.py" }

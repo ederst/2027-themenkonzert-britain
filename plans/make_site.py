@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # make_site.py: build a self-contained, static, German-UI browseable site
-# (britain-concert-site.html) from the two canonical semicolon CSVs.
+# (docs/index.html, served by GitHub Pages from the docs/ folder)
+# from the two canonical semicolon CSVs.
 # Stdlib only: csv, html, json. No third-party deps, no network, no build step.
 # The HTML embeds the row data as JSON + a tiny vanilla JS filter; works from
 # file:// and any static host / gh-pages. CSV stays the single source of truth;
@@ -9,7 +10,7 @@ import csv, html, json, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT  = ROOT / "britain-concert-site.html"
+OUT  = ROOT / "docs" / "index.html"
 TS   = ROOT / "britain-arrangements.csv"
 GS   = ROOT / "guest-acts.csv"
 
@@ -135,5 +136,6 @@ filter('arrangements');filter('guests');
 </body>
 </html>""")
 
+OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text("".join(parts), encoding="utf-8")
 print(f"wrote {OUT} ({OUT.stat().st_size}b, {len(t_rows)} arr + {len(g_rows)} guest rows embedded)")
