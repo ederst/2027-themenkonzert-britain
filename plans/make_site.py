@@ -99,7 +99,11 @@ def page(sid, title):
     hdr_cells = "".join(f"<th>{html.escape(h)}</th>" for h in header)
     has_genre = "Genre" in header
     has_diff = "Difficulty" in header
-    sel_genre = '<select id="g1"><option value="">Genre: alle</option><option>pop/rock</option><option>classical</option><option>film</option><option>musical</option></select>' if has_genre else ""
+    gj = header.index("Genre") if has_genre else None
+    genres = sorted({r[gj] for r in rows if r[gj]}) if has_genre else []
+    sel_genre = ('<select id="g1"><option value="">Genre: alle</option>'
+                 + "".join(f'<option>{html.escape(g)}</option>' for g in genres)
+                 + "</select>") if has_genre else ""
     sel_diff = '<select id="d1"><option value="">Schwierigkeit: alle</option><option>Leicht</option><option>Mittel</option><option>Schwer</option></select>' if has_diff else ""
     tools = f'<div class="tools"><input type="search" id="q" placeholder="Suchen…" autocomplete="off">{sel_genre}{sel_diff}</div>'
     body = f'''{tools}

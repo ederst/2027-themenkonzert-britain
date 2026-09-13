@@ -82,7 +82,15 @@ def main():
             fail += 1
     if not fail:
         print("[pass] difficulty format: numeric 1-5 (.5 steps), empty = no arrangement")
-    # 4) link health (optional: pass --links; network may be blocked in sandbox)
+    # 5) genre whitelist
+    GENRES = {"pop", "rock", "metal", "punk", "folk", "classical", "musical", "film"}
+    for i, r in enumerate(rows, 2):
+        if r[2].strip() and r[2].strip() not in GENRES:
+            print(f"[fail] row {i}: genre {r[2]!r} not in {sorted(GENRES)}")
+            fail += 1
+    if not fail:
+        print(f"[pass] genre whitelist: {sorted(GENRES)}")
+    # 6) link health (optional: pass --links; network may be blocked in sandbox)
     if not do_links:
         print("[skip] link health check (pass --links to enable; network-optional by design)")
     else:
