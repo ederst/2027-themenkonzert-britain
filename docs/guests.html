@@ -55,6 +55,7 @@ function filter(){
   const q=(el('#q').value||'').toLowerCase();
   const genre = GENRE ? el('#g1').value : '';
   const diff = DIFF ? el('#d1').value : '';
+  const arr = el('#a1') ? el('#a1').value : '';
   let shown=0, h='';
   DATA.forEach((r,i)=>{
     const hay=(r.join(' ')+COLS.join(' ')).toLowerCase();
@@ -68,13 +69,18 @@ function filter(){
       const v=parseFloat(r[dj]);
       if(!(diff==='Leicht' ? v>0 && v<=2 : diff==='Mittel' ? v>=2.5 && v<=3.5 : v>=4)) return;
     }
+    if(arr){
+      const aj=COLS.indexOf('Arrangement Title'); if(aj<0) return;
+      const found = !!(r[aj]||'').trim() && r[aj]!=='-';
+      if(arr==='gefunden' ? !found : found) return;
+    }
     shown++;
     h+='<tr>'+r.map(c=>c?(c.startsWith('https://')||c.startsWith('http://'))?'<td><a href="'+c+'" target="_blank" rel="noopener">'+c+'</a></td>':'<td>'+c+'</td>':'<td class="empty">–</td>').join('')+'</tr>';
   });
   el('#tb').innerHTML=h;
   el('#cnt').textContent='('+shown+' von '+DATA.length+')';
 }
-const ids=['q','g1','d1'];
+const ids=['q','g1','d1','a1'];
 ids.forEach(id=>{const e=el('#'+id); if(e) e.addEventListener('input',filter);});
 filter();
 </script><footer>Stand der Recherche · Großbritannien-Themenkonzert 2027 · 199 Arrangements, 12 Gastakte.</footer></main></body></html>

@@ -105,7 +105,9 @@ def page(sid, title):
                  + "".join(f'<option>{html.escape(g)}</option>' for g in genres)
                  + "</select>") if has_genre else ""
     sel_diff = '<select id="d1"><option value="">Schwierigkeit: alle</option><option>Leicht</option><option>Mittel</option><option>Schwer</option></select>' if has_diff else ""
-    tools = f'<div class="tools"><input type="search" id="q" placeholder="Suchen…" autocomplete="off">{sel_genre}{sel_diff}</div>'
+    has_arr = "Arrangement Title" in header
+    sel_arr = '<select id="a1"><option value="">Arrangement: alle</option><option>gefunden</option><option>offen</option></select>' if has_arr else ""
+    tools = f'<div class="tools"><input type="search" id="q" placeholder="Suchen…" autocomplete="off">{sel_genre}{sel_diff}{sel_arr}</div>'
     body = f'''{tools}
 <section id="{sid}">
 <h2>{sec_title} <span class="count" id="cnt"></span></h2>
@@ -124,6 +126,7 @@ function filter(){{
   const q=(el('#q').value||'').toLowerCase();
   const genre = GENRE ? el('#g1').value : '';
   const diff = DIFF ? el('#d1').value : '';
+  const arr = el('#a1') ? el('#a1').value : '';
   let shown=0, h='';
   DATA.forEach((r,i)=>{{
     const hay=(r.join(' ')+COLS.join(' ')).toLowerCase();
@@ -137,13 +140,18 @@ function filter(){{
       const v=parseFloat(r[dj]);
       if(!(diff==='Leicht' ? v>0 && v<=2 : diff==='Mittel' ? v>=2.5 && v<=3.5 : v>=4)) return;
     }}
+    if(arr){{
+      const aj=COLS.indexOf('Arrangement Title'); if(aj<0) return;
+      const found = !!(r[aj]||'').trim() && r[aj]!=='-';
+      if(arr==='gefunden' ? !found : found) return;
+    }}
     shown++;
     h+='<tr>'+r.map(c=>c?(c.startsWith('https://')||c.startsWith('http://'))?'<td><a href="'+c+'" target="_blank" rel="noopener">'+c+'</a></td>':'<td>'+c+'</td>':'<td class="empty">–</td>').join('')+'</tr>';
   }});
   el('#tb').innerHTML=h;
   el('#cnt').textContent='('+shown+' von '+DATA.length+')';
 }}
-const ids=['q','g1','d1'];
+const ids=['q','g1','d1','a1'];
 ids.forEach(id=>{{const e=el('#'+id); if(e) e.addEventListener('input',filter);}});
 filter();
 </script>'''
